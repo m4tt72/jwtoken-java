@@ -7,32 +7,30 @@ import dev.m4tt72.jwtoken.exceptions.MalformedTokenException;
 import dev.m4tt72.jwtoken.exceptions.TokenVerificationFailedException;
 import dev.m4tt72.jwtoken.models.Algorithm;
 import dev.m4tt72.jwtoken.models.Claim;
+import dev.m4tt72.jwtoken.models.Token;
 import dev.m4tt72.jwtoken.utils.Util;
 
 public class JWToken {
 	
-	public static Future<String> sign(Claim claim, String secret, Algorithm alg) {
-		CompletableFuture<String> completableFuture = new CompletableFuture<String>();
+	public static Future<Token> sign(Claim claim, String secret, Algorithm alg) {
+		CompletableFuture<Token> completableFuture = new CompletableFuture<Token>();
 		Executors.newCachedThreadPool().submit(() -> {
 			String encodedHeader = Util.base64Encode(alg.toString());
 			String encodedPayload = Util.base64Encode(claim.toString());
 			String signature = Util.createHmac(alg, String.format("%s.%s", encodedHeader, encodedPayload), secret);
-			completableFuture.complete(String.format("%s.%s.%s", encodedHeader, encodedPayload, signature));
+			Token token = new Token(String.format("%s.%s.%s", encodedHeader, encodedPayload, signature));
+			completableFuture.complete(token);
 			return null;
 		});
 		return completableFuture;
 	}
 	
-	public static Future<Claim> verify(String token, String secret) {
+	public static Future<Claim> verify(Token token, String secret) {
 		CompletableFuture<Claim> completableFuture = new CompletableFuture<Claim>();
 		Executors.newCachedThreadPool().submit(() -> {
-			String[] splittedToken = token.split("\\.");
-			if(splittedToken.length != 3) {
-				completableFuture.completeExceptionally(new MalformedTokenException());
-			}
-			String header = Util.base64Decode(splittedToken[0]);
-			String payload = Util.base64Decode(splittedToken[1]);
-			String signature = splittedToken[2];
+			String header = Util.base64Decode(token.getHeader());
+			String payload = Util.base64Decode(token.getPayload());
+			String signature = token.getSignature();
 			Algorithm alg = Algorithm.fromJson(header);
 			String currentSignature = Util.createHmac(
 						alg,

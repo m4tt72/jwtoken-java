@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>dev.m4tt72</groupId>
-	<artifactId>jwtoken2</artifactId>
-	<version>0.0.1</version>
+	<artifactId>jwtoken</artifactId>
+	<version>0.1.1</version>
 	<packaging>jar</packaging>
 
 	<name>jwtoken2</name>
