@@ -3,7 +3,6 @@ package dev.m4tt72.jwtoken;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import dev.m4tt72.jwtoken.exceptions.MalformedTokenException;
 import dev.m4tt72.jwtoken.exceptions.TokenVerificationFailedException;
 import dev.m4tt72.jwtoken.models.Algorithm;
 import dev.m4tt72.jwtoken.models.Claim;
