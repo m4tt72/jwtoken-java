@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import dev.m4tt72.jwtoken.models.Algorithm;
+import dev.m4tt72.jwtoken.models.Header;
 
 public class Util {
 	public static String base64Encode(String str) throws UnsupportedEncodingException {
@@ -19,9 +19,9 @@ public class Util {
 		return new String(decoded);
 	}
 	
-	public static String createHmac(Algorithm alg, String msg, String sec) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+	public static String createHmac(Header header, String msg, String sec) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
 		byte[] key = sec.getBytes("UTF-8");
-		String algorithm = "HmacSHA" + alg.getAlg().substring(2);
+		String algorithm = "HmacSHA" + header.getAlg().substring(2);
 		Mac hmac = Mac.getInstance(algorithm);
 		SecretKeySpec keySpec = new SecretKeySpec(key, algorithm);
 		hmac.init(keySpec);

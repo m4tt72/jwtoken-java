@@ -9,17 +9,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dev.m4tt72.jwtoken.enums.HmacAlgorithm;
 
-public class Algorithm {
+public class Header {
 	
 	private String alg;
 	private String typ;
 	
-	public Algorithm() {
+	public Header() {
 		alg = "HS256";
 		typ = "JWT";
 	}
 	
-	public Algorithm(HmacAlgorithm alg) {
+	public Header(HmacAlgorithm alg) {
 		this.alg = alg.getAlgorithm();
 		this.typ = "JWT";
 	}
@@ -36,10 +36,10 @@ public class Algorithm {
 		return typ;
 	}
 	
-	public static Algorithm fromJson(String json) {
+	public static Header fromJson(String json) {
 		ObjectMapper mapper = new ObjectMapper(); 
 		try {
-			return mapper.readValue(json, Algorithm.class);
+			return mapper.readValue(json, Header.class);
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 		} catch (JsonMappingException e) {
