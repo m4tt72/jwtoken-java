@@ -10,7 +10,7 @@ JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and s
 
 ### JWToken.sign(claim, secret, algorithm)
 
-`return Future<Token>`
+`return Token`
 
 `claim` is a Claim object containing the claim.
 
@@ -33,13 +33,13 @@ Claim claim = new Claim("aaa", "bbb", "ccc", new Date(), new Date());
 Algorithm algorithm = new Algorithm(HmacAlgorithm.HS512);
 String secret = "s3cr3t";
 
-Token token = JWToken.sign(claim, secret, algorithm).get();
+Token token = JWToken.sign(claim, secret, algorithm);
 System.out.println(token.getToken());
 ```
 
 ### JWToken.verify(token, secret)
 
-`return Future<Claim>`
+`return Claim`
 
 `token` is a Token object.
 
@@ -50,7 +50,7 @@ System.out.println(token.getToken());
 ```java
 Token token = new Token("xxxxx.yyyyyy.zzzzzz");
 String secret = "s3cr3t";
-String decodedPayload = JWToken.verify(token, secret).get();
+String decodedPayload = JWToken.verify(token, secret);
 System.out.println(decodedPayload);
 ```
 
