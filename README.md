@@ -33,7 +33,7 @@ The specs defines many more algorithms for signing. You can find them all in [RF
 **Example**
 
 ```java
-Claim claim = new Claim("aaa", "bbb", "ccc", new Date(), new Date());
+Claim claim = new Claim("iss", "sub", "aud", new Date(new Date().getTime() + 1000), new Date());
 
 String secret = "s3cr3t";
 
