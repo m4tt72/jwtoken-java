@@ -37,7 +37,7 @@ Claim claim = new Claim("iss", "sub", "aud", new Date(new Date().getTime() + 100
 
 String secret = "s3cr3t";
 
-Token token = JWToken.sign(claim, secret, Algorithm.HS256);
+Token token = JWToken.sign(claim, Algorithm.HS512(secret));
 System.out.println(token.getToken());
 ```
 
