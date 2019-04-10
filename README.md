@@ -18,11 +18,15 @@ JSON Web Token (JWT) is an open standard (RFC 7519) that defines a compact and s
 
 `algorithm` is the algoritm used for the Hmac
 
-**Available algoritms**
+## Available Algorithms
 
-* HS256
-* HS384
-* HS512
+The library implements JWT Verification and Signing using the following algorithms:
+
+| JWS | Algorithm | Description |
+| :-------------: | :-------------: | :----- |
+| HS256 | HMAC256 | HMAC with SHA-256 |
+| HS384 | HMAC384 | HMAC with SHA-384 |
+| HS512 | HMAC512 | HMAC with SHA-512 |
 
 The specs defines many more algorithms for signing. You can find them all in [RFC 7518](https://tools.ietf.org/html/rfc7518#section-3).
 
@@ -30,10 +34,10 @@ The specs defines many more algorithms for signing. You can find them all in [RF
 
 ```java
 Claim claim = new Claim("aaa", "bbb", "ccc", new Date(), new Date());
-Algorithm algorithm = new Algorithm(HmacAlgorithm.HS512);
+
 String secret = "s3cr3t";
 
-Token token = JWToken.sign(claim, secret, algorithm);
+Token token = JWToken.sign(claim, secret, Algorithm.HS256);
 System.out.println(token.getToken());
 ```
 
@@ -51,7 +55,7 @@ System.out.println(token.getToken());
 Token token = new Token("xxxxx.yyyyyy.zzzzzz");
 String secret = "s3cr3t";
 String decodedPayload = JWToken.verify(token, secret);
-System.out.println(decodedPayload);
+System.out.println(decodedPayload.toJson());
 ```
 
 # Licence

@@ -20,7 +20,6 @@ public class Claim {
 	private Claim() {}
 	
 	public Claim(String iss, String sub, String aud, Date exp, Date iat) {
-		super();
 		this.iss = iss;
 		this.sub = sub;
 		this.aud = aud;
@@ -82,7 +81,7 @@ public class Claim {
 		return null;
 	}
 	
-	public String toString() {
+	public String toJson() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			return mapper.writeValueAsString(this);

@@ -4,7 +4,7 @@
 
 	<groupId>dev.m4tt72</groupId>
 	<artifactId>jwtoken</artifactId>
-	<version>0.1.2</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>jwtoken</name>

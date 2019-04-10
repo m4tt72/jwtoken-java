@@ -1,11 +1,10 @@
 package dev.m4tt72.jwtoken.exceptions;
 
-public class MalformedTokenException extends Exception {
+public class MalformedTokenException extends JWTokenException {
 
 	private static final long serialVersionUID = 1L;
 
-	@Override
-	public String getMessage() {
-		return "Malformed token";
+	public MalformedTokenException() {
+		super("Malformed token");
 	}
 }

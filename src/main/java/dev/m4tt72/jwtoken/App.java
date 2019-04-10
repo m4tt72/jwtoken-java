@@ -1,9 +1,7 @@
 package dev.m4tt72.jwtoken;
 
 import java.util.Date;
-
-import dev.m4tt72.jwtoken.enums.HmacAlgorithm;
-import dev.m4tt72.jwtoken.models.Header;
+import dev.m4tt72.jwtoken.algorithms.Algorithm;
 import dev.m4tt72.jwtoken.models.Claim;
 import dev.m4tt72.jwtoken.models.Token;
 
@@ -14,15 +12,13 @@ public class App {
 		try {
 
 			String secret = "s3cr3t";
-
-			Claim claim = new Claim("aaa", "bbb", "ccc", new Date(), new Date());
-			Header header = new Header(HmacAlgorithm.HS256);
-
-			Token token = JWToken.sign(claim, secret, header);
-			System.out.println(token.getToken());
+			Claim claim = new Claim("aaa", "bbb", "ccc", new Date(new Date().getTime() + 1000), new Date());
+			
+			Token token = JWToken.sign(claim, secret, Algorithm.HS256);
+			System.out.println(token);
 
 			Claim decodedPayload = JWToken.verify(token, secret);
-			System.out.println(decodedPayload);
+			System.out.println(decodedPayload.toJson());
 
 		} catch (Exception e) {
 			e.printStackTrace();

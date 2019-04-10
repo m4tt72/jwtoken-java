@@ -1,13 +1,11 @@
 package dev.m4tt72.jwtoken.models;
 
 import java.io.IOException;
-
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import dev.m4tt72.jwtoken.enums.HmacAlgorithm;
+import dev.m4tt72.jwtoken.algorithms.Algorithm;
 
 public class Header {
 	
@@ -19,12 +17,15 @@ public class Header {
 		typ = "JWT";
 	}
 	
-	public Header(HmacAlgorithm alg) {
+	public Header(Algorithm alg) {
 		this.alg = alg.getAlgorithm();
 		this.typ = "JWT";
 	}
 
 	public String getAlg() {
+		if(alg.startsWith("HS")) {
+			return "HmacSHA" + alg.substring(2);
+		}
 		return alg;
 	}
 
@@ -50,7 +51,7 @@ public class Header {
 		return null;
 	}
 	
-	public String toString() {
+	public String toJson() {
 		ObjectMapper mapper = new ObjectMapper(); 
 		try {
 			return mapper.writeValueAsString(this);

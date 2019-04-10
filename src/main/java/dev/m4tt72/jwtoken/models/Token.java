@@ -33,4 +33,8 @@ public class Token {
 		return token.split("\\.")[2];
 	}
 
+	public String toString() {
+		return this.token;
+	}
+	
 }	
