@@ -18,14 +18,11 @@ public class Header {
 	}
 	
 	public Header(Algorithm alg) {
-		this.alg = alg.getAlgorithm();
+		this.alg = alg.getName();
 		this.typ = "JWT";
 	}
 
 	public String getAlg() {
-		if(alg.startsWith("HS")) {
-			return "HmacSHA" + alg.substring(2);
-		}
 		return alg;
 	}
 

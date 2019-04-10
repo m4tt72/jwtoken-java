@@ -1,6 +1,7 @@
 package dev.m4tt72.jwtoken;
 
 import java.util.Date;
+
 import dev.m4tt72.jwtoken.algorithms.Algorithm;
 import dev.m4tt72.jwtoken.models.Claim;
 import dev.m4tt72.jwtoken.models.Token;
@@ -14,7 +15,7 @@ public class App {
 			String secret = "s3cr3t";
 			Claim claim = new Claim("aaa", "bbb", "ccc", new Date(new Date().getTime() + 1000), new Date());
 			
-			Token token = JWToken.sign(claim, secret, Algorithm.HS256);
+			Token token = JWToken.sign(claim, Algorithm.HS512(secret));
 			System.out.println(token);
 
 			Claim decodedPayload = JWToken.verify(token, secret);
