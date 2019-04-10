@@ -1,7 +1,7 @@
 package dev.m4tt72.jwtoken.enums;
 
 public enum HmacAlgorithm {
-	HS256 ("HS265"),
+	HS256 ("HS256"),
 	HS384 ("HS384"),
 	HS512 ("HS512");
 	

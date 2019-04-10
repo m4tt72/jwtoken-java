@@ -16,7 +16,7 @@ public class App {
 			String secret = "s3cr3t";
 
 			Claim claim = new Claim("aaa", "bbb", "ccc", new Date(), new Date());
-			Header header = new Header(HmacAlgorithm.HS384);
+			Header header = new Header(HmacAlgorithm.HS256);
 
 			Token token = JWToken.sign(claim, secret, header);
 			System.out.println(token.getToken());
@@ -29,7 +29,7 @@ public class App {
 		}
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime);
-		System.out.println(duration);
+		System.out.println(duration / 1000000 + " ms");
 	}
 
 }
